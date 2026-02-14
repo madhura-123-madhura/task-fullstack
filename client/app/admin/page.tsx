@@ -3,6 +3,7 @@
 import { useAddTaskMutation, useDeleteTaskMutation, useGetTaskQuery, useUpdateTaskMutation } from '@/redux/api/task.api'
 import { Task } from '@/type/Task'
 import { useState } from 'react'
+import { Button, Table } from 'react-bootstrap'
 
 
 const dashbord = () => {
@@ -44,9 +45,9 @@ const dashbord = () => {
     return <>
         <input onChange={e => setTask({ ...Task, title: e.target.value })} type="text" placeholder='enter title' />
         <input onChange={e => setTask({ ...Task, desc: e.target.value })} type="text" placeholder='enter desc' />
-        <button onClick={handleAddTask}>Submit</button>
+        <Button variant='primary' onClick={handleAddTask}>Submit</Button>
         {
-            data && <table >
+            data && <Table >
                 <thead>
                     <tr >
                         <th>#</th>
@@ -64,15 +65,15 @@ const dashbord = () => {
                             <td>
                                 {
                                     item.publish
-                                        ? <button onClick={e => handleupdateTask({ ...item, publish: false })}>publish</button>
-                                        : <button onClick={e => handleupdateTask({ ...item, publish: true })}>unPublish</button>
+                                        ? <Button variant='success' onClick={e => handleupdateTask({ ...item, publish: false })}>publish</Button >
+                                        : <Button variant='warning' onClick={e => handleupdateTask({ ...item, publish: true })}>unPublish</Button >
                                 }
-                                <button onClick={e => handledeleteTask(item._id as string)}>delete</button>
+                                <Button variant='danger' onClick={e => handledeleteTask(item._id as string)}>delete</Button >
                             </td>
                         </tr>)
                     }
                 </tbody>
-            </table>
+            </Table>
         }
     </>
 }
